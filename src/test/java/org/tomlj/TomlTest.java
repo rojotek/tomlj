@@ -561,6 +561,12 @@ class TomlTest {
     assertTrue(result3.hasErrors());
   }
 
+  @Test
+  void testArray() throws Exception {
+    TomlParseResult result1 = Toml.parse("plugin-kafka-log-filter-topics = [\n[ \"0xd3610b1c54575b7f4f0dc03d210b8ac55624ae007679b7a928a4f25a709331a8\" ]\n]\n");
+    assertFalse(result1.hasErrors(), () -> joinErrors(result1));
+  }
+
   private String joinErrors(TomlParseResult result) {
     return result.errors().stream().map(TomlParseError::toString).collect(Collectors.joining("\n"));
   }
